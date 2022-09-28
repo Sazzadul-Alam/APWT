@@ -1,0 +1,12 @@
+@extends('layouts.app')
+@section('content')
+<div>
+    Member:
+    <br>
+    <ol>
+        <li>Sazzad</li>
+        <li>Antu</li>
+        <li>Rafi</li>
+</ol>
+</div>
+@endsection
