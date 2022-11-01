@@ -15,7 +15,7 @@
         </div>
         @endif
         <form class=" shadow-lg p-3 mb-5 bg-body rounded row g-3" action="{{route('ownerReg')}}" method="post">
-        @if(Session::has('success'))
+            @if(Session::has('success'))
             <div class="alert alert-success">{{Session::get('success')}}</div>
             @endif
             @if(Session::has('fail'))

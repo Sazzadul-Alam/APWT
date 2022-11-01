@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\pRegistration;
 use App\Models\ownerReg;
+use Session;
+use Hash;
 
 class RegistrationController extends Controller
 {
@@ -28,7 +30,7 @@ class RegistrationController extends Controller
         $p->email =$request->email;
         $p-> phone =$request->phone;
         $p-> address =$request->address;
-        $p-> password =$request->password;
+        $p-> password =Hash::make($request->password);
         $res=$p->save();
         if($res){
             return back()->with('success','Registered successfuly');
@@ -57,7 +59,7 @@ class RegistrationController extends Controller
         $o->email =$request->email;
         $o-> phone =$request->phone;
         $o-> address =$request->address;
-        $o-> password =$request->password;
+        $o-> password =Hash::make($request->password);
         $res=$o->save();
         if($res){
             return back()->with('success','Registered successfuly');
@@ -66,5 +68,32 @@ class RegistrationController extends Controller
             return back()->with('fail','registration failed');
         }
 
+    }
+
+    public function loginUser(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $user=pRegistration::where('email','=',$request->email)->first();
+        if($user){
+            if(Hash::check($request->password,$user->password)){
+                $request->session()->put('loginId',$user->id);
+                return redirect('dashboard');
+            }
+            else{
+                return back()->with('fail','this password is not matched');
+            }
+        }
+        if($user){
+
+        }
+        else{
+            return back()->with('fail','this email is not registerd');
+        }
+    }
+    public function dashboard(){
+        return "Welcome";
     }
 }
