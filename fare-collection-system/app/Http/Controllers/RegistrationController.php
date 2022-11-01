@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\pRegistration;
+use App\Models\ownerReg;
 
 class RegistrationController extends Controller
 {
@@ -13,13 +15,27 @@ class RegistrationController extends Controller
     public function registerSubmit(Request $request)
     {
         $validated = $request->validate([
-            'first-name' => 'required',
-            'last-name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'address' => 'required|max:50',
             'password' => 'required|confirmed|min:4',
         ]);
+        $p = new pRegistration();
+        $p-> first_name =$request->first_name;
+        $p-> last_name =$request->last_name;
+        $p->email =$request->email;
+        $p-> phone =$request->phone;
+        $p-> address =$request->address;
+        $p-> password =$request->password;
+        $res=$p->save();
+        if($res){
+            return back()->with('success','Registered successfuly');
+        }
+        else{
+            return back()->with('fail','registration failed');
+        }
     }
     public function oRegister()
     {
@@ -28,12 +44,27 @@ class RegistrationController extends Controller
     public function oRegisterSubmit(Request $request)
     {
         $validated = $request->validate([
-            'company-name' => 'required',
-            'owner-name' => 'required',
+            'company_name' => 'required',
+            'owner_name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'address' => 'required|max:50',
             'password' => 'required|confirmed|min:4',
         ]);
+        $o = new ownerReg();
+        $o-> company_name =$request->company_name;
+        $o-> owner_name =$request->owner_name;
+        $o->email =$request->email;
+        $o-> phone =$request->phone;
+        $o-> address =$request->address;
+        $o-> password =$request->password;
+        $res=$o->save();
+        if($res){
+            return back()->with('success','Registered successfuly');
+        }
+        else{
+            return back()->with('fail','registration failed');
+        }
+
     }
 }

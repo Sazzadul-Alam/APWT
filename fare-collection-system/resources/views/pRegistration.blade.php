@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div>
+<div >
     <div class="mt-5">
         <h2 style="text-align:center;">Welcome</h2>
     </div>
@@ -14,12 +14,18 @@
             </ul>
         </div>
         @endif
-        <form class="row g-3" action="{{route('registration')}}" method="post">
+        <form class="shadow-lg p-3 mb-5 bg-body rounded row g-3" action="{{route('registration')}}" method="post">
+            @if(Session::has('success'))
+            <div class="alert alert-success">{{Session::get('success')}}</div>
+            @endif
+            @if(Session::has('fail'))
+            <div class="alert alert-danger">{{Session::get('fail')}}</div>
+            @endif
             @csrf
             <div class="col-md-6">
-                <label for="first-name" class="form-label">First name</label>
+                <label for="first_name" class="form-label">First name</label>
                 <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                    name="first-name" value="{{old('first-name')}}">
+                    name="first_name" value="{{old('first_name')}}">
                 @error('first name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -28,9 +34,9 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="last-name" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="last-name"
-                    value="{{old('last-name')}}">
+                <label for="last_name" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="last_name"
+                    value="{{old('last_name')}}">
                 @error('last name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror

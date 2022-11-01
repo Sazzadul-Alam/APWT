@@ -14,12 +14,18 @@
             </ul>
         </div>
         @endif
-        <form class="row g-3" action="{{route('ownerReg')}}" method="post">
+        <form class=" shadow-lg p-3 mb-5 bg-body rounded row g-3" action="{{route('ownerReg')}}" method="post">
+        @if(Session::has('success'))
+            <div class="alert alert-success">{{Session::get('success')}}</div>
+            @endif
+            @if(Session::has('fail'))
+            <div class="alert alert-danger">{{Session::get('fail')}}</div>
+            @endif
             @csrf
             <div class="col-md-6">
-                <label for="company-name" class="form-label">Company name</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="Company name" name="company-name"
-                    value="{{old('company-name')}}">
+                <label for="company_name" class="form-label">Company name</label>
+                <input type="text" class="form-control" id="validationCustom02" placeholder="Company name" name="company_name"
+                    value="{{old('company_name')}}">
                 @error('company name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -28,9 +34,9 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="owner-name" class="form-label">Owner name</label>
+                <label for="owner_name" class="form-label">Owner name</label>
                 <input type="text" class="form-control" id="validationCustom01" placeholder="Owner name"
-                    name="owner-name" value="{{old('owner-name')}}">
+                    name="owner_name" value="{{old('owner_name')}}">
                 @error('owner name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
