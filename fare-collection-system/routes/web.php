@@ -14,9 +14,9 @@ use App\Http\Controllers\RegistrationController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/login', function () {
     return view('pLogin');
 })->name('log.in');
@@ -27,4 +27,5 @@ Route::post('/registration', [RegistrationController::class, 'registerSubmit'])-
 Route::get('/OwnerRegistration', [RegistrationController::class, 'oRegister'])->name('ownerReg');
 Route::post('/OwnerRegistration', [RegistrationController::class, 'oRegisterSubmit'])->name('ownerReg');
 Route::post('login-user',[RegistrationController::class,'loginUser'])->name('login-user');
-Route::get('/dashboard',[RegistrationController::class,'dashboard']);
+Route::get('/dashboard',[RegistrationController::class,'dashboard'])->name('passenger');
+Route::get('/owner',[RegistrationController::class,'owner']);

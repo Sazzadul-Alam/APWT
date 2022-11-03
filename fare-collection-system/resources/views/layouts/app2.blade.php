@@ -8,9 +8,9 @@
 </head>
 
 <body>
-    @include('common.topNavBar')
+    @include('common.topNavBar2')
     <div>
-        @yield('content')
+        @yield('content2')
     </div>
 </body>
 

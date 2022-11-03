@@ -77,23 +77,31 @@ class RegistrationController extends Controller
             'password' => 'required',
         ]);
         $user=pRegistration::where('email','=',$request->email)->first();
+        $o=ownerReg::where('email','=',$request->email)->first();
         if($user){
             if(Hash::check($request->password,$user->password)){
                 $request->session()->put('loginId',$user->id);
                 return redirect('dashboard');
             }
             else{
+                
                 return back()->with('fail','this password is not matched');
             }
         }
-        if($user){
-
+        if($o){
+            if(Hash::check($request->password,$o->password)){
+            $request->session()->put('loginId',$o->id);
+            return redirect('owner');
         }
         else{
-            return back()->with('fail','this email is not registerd');
+            return back()->with('fail','this password is not matched');
         }
     }
+    }
     public function dashboard(){
-        return "Welcome";
+        return view('passengerDash');
+    }
+    public function owner(){
+        return view('ownerDash');
     }
 }
