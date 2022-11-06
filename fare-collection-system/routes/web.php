@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\BusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\RegistrationController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::get('/login', function () {
     return view('pLogin');
 })->name('log.in');
@@ -29,3 +30,4 @@ Route::post('/OwnerRegistration', [RegistrationController::class, 'oRegisterSubm
 Route::post('login-user',[RegistrationController::class,'loginUser'])->name('login-user');
 Route::get('/dashboard',[RegistrationController::class,'dashboard'])->name('passenger');
 Route::get('/owner',[RegistrationController::class,'owner']);
+Route::get('/Add-Bus',[BusController::class,'busAdd'])->name('addBus');
